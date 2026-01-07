@@ -1,419 +1,291 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun Fakhri 💙</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Untuk ikon -->
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun Fakhri 💙</title>
 
-        body {
-            margin: 0;
-            font-family: 'Nunito Sans', sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
-            color: white;
-            background: linear-gradient(135deg, #0a0f22, #1a1a2e, #16213e);
-            animation: bgShift 20s ease-in-out infinite alternate;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-        @keyframes bgShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
+<style>
+*{box-sizing:border-box}
 
-        .bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at top, rgba(10, 15, 34, 0.8), rgba(0, 0, 0, 0.9));
-            z-index: -2;
-        }
+/* BODY */
+body{
+    margin:0;
+    font-family:'Nunito Sans',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    color:white;
+    background:linear-gradient(135deg,#0a0f22,#1a1a2e,#16213e);
+    animation:bgShift 20s ease-in-out infinite alternate;
+}
 
-        .container {
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+@keyframes bgShift{
+    0%{background-position:0% 50%}
+    100%{background-position:100% 50%}
+}
 
-        #clickText {
-            cursor: pointer;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            animation: heartbeat 1.5s infinite;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
+.bg{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top,rgba(10,15,34,.8),rgba(0,0,0,.9));
+    z-index:-2;
+}
 
-        #clickText:hover {
-            transform: scale(1.1);
-            color: #4fc3f7;
-        }
+/* CONTAINER — FIX UTAMA */
+.container{
+    min-height:100vh;
+    padding:40px 20px 220px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+}
 
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+/* CLICK TEXT */
+#clickText{
+    cursor:pointer;
+    font-size:1.8rem;
+    margin-bottom:30px;
+    animation:heartbeat 1.5s infinite;
+    text-shadow:0 0 20px rgba(255,255,255,.5);
+}
+@keyframes heartbeat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.05)}
+}
 
-        .envelope {
-            position: relative;
-            width: 320px;
-            height: 210px;
-            background: linear-gradient(145deg, #1f4f80, #2a71c7);
-            border-radius: 0 0 12px 12px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.1);
-            perspective: 1000px;
-            transition: all 0.5s ease;
-            filter: drop-shadow(0 0 10px rgba(42, 113, 199, 0.5));
-        }
+/* ENVELOPE */
+.envelope{
+    position:relative;
+    width:320px;
+    height:210px;
+    margin-top:40px;
+    background:linear-gradient(145deg,#1f4f80,#2a71c7);
+    border-radius:0 0 12px 12px;
+    box-shadow:0 25px 50px rgba(0,0,0,.7);
+    perspective:1000px;
+    transition:.4s;
+}
 
-        .envelope:hover {
-            transform: translateY(-5px);
-        }
+.envelope::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    border-left:160px solid transparent;
+    border-right:160px solid transparent;
+    border-top:115px solid #4fc3f7;
+    transform-origin:top;
+    transition:.8s;
+    z-index:3;
+}
 
-        .envelope::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 115px solid #4fc3f7;
-            transform-origin: top;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
-            z-index: 3;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
-        }
+.envelope.open::before{
+    transform:translateY(-110px);
+    opacity:0;
+}
 
-        .envelope.open::before {
-            transform: translateY(-110px); /* Slide ke atas alih-alih rotate */
-            opacity: 0; /* Fade out untuk efek halus */
-            z-index: 1;
-        }
+/* PAPER */
+.paper{
+    position:absolute;
+    left:12px;
+    right:12px;
+    bottom:12px;
+    height:190px;
+    background:#fff;
+    border-radius:8px;
+    padding:18px;
+    overflow-y:auto;
+    color:#333;
+    line-height:1.6;
+    box-shadow:0 -12px 25px rgba(0,0,0,.2);
+    transition:1.2s cubic-bezier(.22,1,.36,1);
+    z-index:2;
+}
 
-        .paper {
-            position: absolute;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
-            height: 190px;
-            background: linear-gradient(145deg, #fff, #f0f0f0);
-            border-radius: 8px;
-            padding: 18px;
-            overflow-y: auto;
-            color: #333;
-            font-size: 1rem;
-            line-height: 1.6;
-            box-shadow: 0 -12px 25px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.05);
-            transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1), height 1.2s ease;
-            z-index: 2;
-            backdrop-filter: blur(5px); /* Fallback: hapus jika tidak didukung */
-        }
+.envelope.open .paper{
+    transform:translateY(-110px);
+    height:360px;
+    animation:paperFloat 4s ease-in-out infinite;
+}
 
-        .envelope.open .paper {
-            transform: translateY(-130px);
-            height: 360px;
-            animation: paperFloat 4s ease-in-out infinite;
-        }
+@keyframes paperFloat{
+    0%,100%{transform:translateY(-110px)}
+    50%{transform:translateY(-115px)}
+}
 
-        @keyframes paperFloat {
-            0%, 100% { transform: translateY(-130px) rotate(0deg); }
-            50% { transform: translateY(-135px) rotate(0.5deg); }
-        }
+/* SHAKE */
+.shake{animation:shake .4s}
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-5px)}
+    75%{transform:translateX(5px)}
+}
 
-        .shake {
-            animation: shake 0.5s ease;
-        }
+/* TYPING */
+#typed-text span{
+    opacity:0;
+    animation:fade .2s forwards;
+}
+@keyframes fade{to{opacity:1}}
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
+#cursor{
+    display:inline-block;
+    width:3px;
+    height:1.2em;
+    background:#2a71c7;
+    animation:blink .8s infinite;
+}
+@keyframes blink{50%{opacity:0}}
 
-        #typed-text span {
-            opacity: 0;
-            animation: fadeIn 0.2s forwards;
-        }
+/* CONFETTI */
+.confetti{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:10;
+}
+.confetti-piece{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:#4fc3f7;
+    border-radius:50%;
+    animation:fall 3s linear infinite;
+}
+@keyframes fall{
+    from{transform:translateY(-100vh)}
+    to{transform:translateY(100vh);opacity:0}
+}
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
+/* CONTROLS */
+.controls{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+}
+.control-btn{
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.25);
+    color:white;
+    font-size:1.2rem;
+}
 
-        #cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em;
-            background: linear-gradient(90deg, #2a71c7, #4fc3f7);
-            animation: blink 1s steps(1) infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        /* Confetti Animation */
-        .confetti {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-            overflow: hidden;
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #ff6b6b, #feca57, #48dbfb, #0abde3);
-            border-radius: 50%;
-            animation: fall 3s linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Kontrol Musik */
-        .controls {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .control-btn:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.1);
-        }
-
-        /* Responsivitas */
-        @media (max-width: 768px) {
-            .envelope {
-                width: 280px;
-                height: 180px;
-            }
-            .envelope::before {
-                border-left: 140px solid transparent;
-                border-right: 140px solid transparent;
-                border-top: 100px solid #4fc3f7;
-            }
-            .paper {
-                height: 160px;
-            }
-            .envelope.open .paper {
-                height: 300px;
-            }
-            #clickText {
-                font-size: 1.5rem;
-            }
-            .controls {
-                bottom: 10px;
-                right: 10px;
-            }
-        }
-
-        /* Tombol Restart */
-        #restartBtn {
-            margin-top: 30px;
-            padding: 12px 24px;
-            background: linear-gradient(145deg, #2a71c7, #4fc3f7);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            display: none;
-        }
-
-        #restartBtn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-    </style>
+/* RESTART */
+#restartBtn{
+    margin-top:40px;
+    padding:12px 24px;
+    border:none;
+    border-radius:25px;
+    background:#4fc3f7;
+    color:white;
+    display:none;
+}
+</style>
 </head>
+
 <body>
-    <div class="bg"></div>
-    <div class="confetti" id="confetti"></div>
-    <div class="container">
-        <h2 id="clickText" aria-label="Klik untuk membuka kartu ulang tahun" tabindex="0">Coba klik 🎁 <i class="fas fa-gift"></i></h2>
-        <div class="envelope" id="envelope">
-            <div class="paper" id="paper">
-                <span id="typed-text"></span><span id="cursor"></span>
-            </div>
+<div class="bg"></div>
+<div class="confetti" id="confetti"></div>
+
+<div class="container">
+    <h2 id="clickText">Coba klik 🎁</h2>
+
+    <div class="envelope" id="envelope">
+        <div class="paper" id="paper">
+            <span id="typed-text"></span><span id="cursor"></span>
         </div>
-        <button id="restartBtn" aria-label="Mulai ulang animasi">Mulai Ulang <i class="fas fa-redo"></i></button>
     </div>
-    <div class="controls">
-        <button class="control-btn" id="musicToggle" aria-label="Toggle musik"><i class="fas fa-play"></i></button>
-    </div>
-    <audio id="bg-music" src="lagu.mp3" preload="auto" loop></audio>
-    <script>
-        const clickText = document.getElementById('clickText');
-        const envelope = document.getElementById('envelope');
-        const paper = document.getElementById('paper');
-        const typedText = document.getElementById('typed-text');
-        const cursor = document.getElementById('cursor');
-        const music = document.getElementById('bg-music');
-        const restartBtn = document.getElementById('restartBtn');
-        const musicToggle = document.getElementById('musicToggle');
-        const confettiContainer = document.getElementById('confetti');
 
-        const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
+    <button id="restartBtn">Mulai Ulang</button>
+</div>
 
-to youuu, my boo, my sunshine, my everything. hari ini hari kamu, dan aku mau kamu tau seberapa besar aku sayang dan cinta sama kamu. on your special day, i love you now, and always will. in every possible way.
+<div class="controls">
+    <button class="control-btn" id="musicToggle"><i class="fas fa-play"></i></button>
+</div>
 
-kamu itu tenang di saat aku marah, kamu itu peluk nyaman pas aku cape, kamu itu rumah buat hatiku yang sering nyasar. you are the one i care about most, lebih dari apa pun.
+<audio id="bg-music" src="lagu.mp3" loop></audio>
 
-kamu adalah cahaya yang terangin badaiku, dan aku harap kita bisa deket terus kaya gini selamanya. i can't even find the right words to explain how much you mean to me.
+<script>
+const clickText=document.getElementById('clickText');
+const envelope=document.getElementById('envelope');
+const paper=document.getElementById('paper');
+const typedText=document.getElementById('typed-text');
+const cursor=document.getElementById('cursor');
+const music=document.getElementById('bg-music');
+const restartBtn=document.getElementById('restartBtn');
+const confetti=document.getElementById('confetti');
+const musicToggle=document.getElementById('musicToggle');
 
-rasanya tuh, kalau pakai kata-kata malah ga cukup. kadang cinta itu terlalu besar buat dijelasin, tapi selalu bisa dirasain dan kamu pasti bisa ngerasain itu dari aku.
+const message=`WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
 
-so on your birthday, i just want to remind you again — i choose you. setiap hari. setiap waktu. in every lifetime, i'd still choose you.
+to youuu, my boo, my sunshine, my everything. hari ini hari kamu... (dst tetap sama)`;
 
-and i'll say it again and again, karena ulang tahun kamu bukan cuma perayaan umur, tapi juga kesempatan buat aku bilang:
+let i=0,opened=false,playing=false;
 
-I LOVE JUST YOU!
+function confettiBoom(){
+    for(let j=0;j<40;j++){
+        const c=document.createElement('div');
+        c.className='confetti-piece';
+        c.style.left=Math.random()*100+'%';
+        confetti.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
+    }
+}
 
-hari ini, nikmatin setiap momen ya. tertawa, bahagia, dikelilingi cinta dari orang-orang terdekatmu.
+clickText.onclick=()=>{
+    if(opened)return;
+    opened=true;
+    envelope.classList.add('shake');
+    setTimeout(()=>{
+        envelope.classList.remove('shake');
+        envelope.classList.add('open');
+        confettiBoom();
+        music.play().catch(()=>{});
+        musicToggle.innerHTML='<i class="fas fa-pause"></i>';
+        typeChar();
+    },400);
+    clickText.style.display='none';
+};
 
-dan jangan lupa,
-ada aku yang paling depan,
-paling kenceng teriaknya…
+function typeChar(){
+    if(i<message.length){
+        const s=document.createElement('span');
+        s.textContent=message[i++];
+        typedText.appendChild(s);
+        paper.scrollTop=paper.scrollHeight;
+        setTimeout(typeChar,40);
+    }else{
+        cursor.style.display='none';
+        restartBtn.style.display='block';
+    }
+}
 
-HAPPY BIRTHDAY SAYANGGG! 🤍`;
+restartBtn.onclick=()=>{
+    opened=false;i=0;
+    typedText.innerHTML='';
+    cursor.style.display='inline-block';
+    envelope.classList.remove('open');
+    clickText.style.display='block';
+    restartBtn.style.display='none';
+    music.pause();music.currentTime=0;
+    musicToggle.innerHTML='<i class="fas fa-play"></i>';
+};
 
-        let i = 0;
-        let opened = false;
-        let typingInterval;
-        let isPlaying = false;
-
-        // Fungsi untuk membuat confetti
-        function createConfetti() {
-            for (let j = 0; j < 50; j++) {
-                const piece = document.createElement('div');
-                piece.classList.add('confetti-piece');
-                piece.style.left = Math.random() * 100 + '%';
-                piece.style.animationDelay = Math.random() * 2 + 's';
-                confettiContainer.appendChild(piece);
-                setTimeout(() => piece.remove(), 3000);
-            }
-        }
-
-        // Fungsi untuk membuka envelope
-        function openEnvelope() {
-            if (opened) return;
-            opened = true;
-
-            envelope.classList.add('shake');
-            setTimeout(() => {
-                envelope.classList.remove('shake');
-                envelope.classList.add('open');
-                createConfetti(); // Tambahkan confetti
-
-                music.volume = 0.5;
-                music.play().catch(() => {
-                    console.warn('Musik tidak dapat dimainkan. Pastikan file "lagu.mp3" ada.');
-                });
-                isPlaying = true;
-                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-
-                setTimeout(() => {
-                    typeChar();
-                }, 1000);
-            }, 500);
-
-            clickText.style.display = 'none';
-        }
-
-        // Event listener untuk klik teks
-        clickText.addEventListener('click', openEnvelope);
-        clickText.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') openEnvelope();
-        });
-
-        // Fungsi typing dengan variasi kecepatan
-        function typeChar() {
-            if (i < message.length) {
-                const char = message[i++];
-                const span = document.createElement('span');
-                span.textContent = char;
-                typedText.appendChild(span);
-                paper.scrollTop = paper.scrollHeight;
-
-                // Variasi kecepatan: lebih cepat untuk spasi, lebih lambat untuk tanda baca
-                let delay = 50;
-                if (char === ' ' || char === '\n') delay = 20;
-                else if (['!', '.', '?', ','].includes(char)) delay = 100;
-
-                typingInterval = setTimeout(typeChar, delay);
-            } else {
-                cursor.style.display = 'none';
-                restartBtn.style.display = 'block';
-            }
-        }
-
-        // Tombol restart
-        restartBtn.addEventListener('click', () => {
-            opened = false;
-            i = 0;
-            typedText.innerHTML = '';
-            cursor.style.display = 'inline-block';
-            envelope.classList.remove('open', 'shake');
-            clickText.style.display = 'block';
-            restartBtn.style.display = 'none';
-            music.pause();
-            music.currentTime = 0;
-            isPlaying = false;
-            musicToggle.innerHTML = '<i class="fas fa-play"></i>';
-            confettiContainer.innerHTML = '';
-            clearTimeout(typingInterval);
-        });
-
-        // Toggle musik
-        musicToggle.addEventListener('click', () => {
-            if (isPlaying) {
-                music.pause();
-                musicToggle.innerHTML = '<i class="fas fa-play"></i>';
-            } else {
-                music.play().catch(() => {
-                    console.warn('Musik tidak dapat dimainkan.');
-                });
-                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-            }
-            isPlaying = !isPlaying;
-        });
-    </script>
+musicToggle.onclick=()=>{
+    if(music.paused){
+        music.play();musicToggle.innerHTML='<i class="fas fa-pause"></i>';
+    }else{
+        music.pause();musicToggle.innerHTML='<i class="fas fa-play"></i>';
+    }
+};
+</script>
 </body>
 </html>
