@@ -1,175 +1,209 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selamat Ulang Tahun Fakhri 💙</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Fakhri 💙</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0; /* Fallback untuk inset jika tidak didukung */
+            background: radial-gradient(circle at top, #0a0f22, #000);
+            animation: slowZoom 16s ease-in-out infinite alternate;
+            z-index: -1;
+        }
 
-<style>
-* { box-sizing: border-box; }
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.06); }
+        }
 
-.bg {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at top, #0a0f22, #000);
-    animation: slowZoom 16s ease-in-out infinite alternate;
-    z-index: -1;
-}
+        body {
+            margin: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            color: white;
+        }
 
-@keyframes slowZoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.06); }
-}
+        .container {
+            min-height: 100vh;
+            padding-top: 40px;
+            padding-bottom: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-/* BODY FIX */
-body {
-    margin: 0;
-    font-family: 'Nunito Sans', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    color: white;
-}
+        #clickText {
+            cursor: pointer;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            animation: pulse 1.4s infinite;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+            transition: opacity 0.3s ease;
+        }
 
-/* CONTAINER BARU */
-.container {
-    min-height: 100vh;
-    padding-top: 40px;
-    padding-bottom: 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.95); }
+        }
 
-/* CLICK TEXT */
-#clickText {
-    cursor: pointer;
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-    animation: pulse 1.4s infinite;
-    text-shadow: 0 0 12px rgba(255,255,255,.3);
-}
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #1f4f80;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            perspective: 1000px;
+            transition: all 0.3s ease;
+        }
 
-@keyframes pulse {
-    0%,100% { opacity: 1; transform: scale(1); }
-    50% { opacity: .6; transform: scale(.95); }
-}
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid #2a71c7;
+            transform-origin: top;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 3;
+        }
 
-/* ENVELOPE */
-.envelope {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    background: #1f4f80;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.6);
-    perspective: 1000px;
-}
+        .envelope.open::before {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
 
-.envelope::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-top: 110px solid #2a71c7;
-    transform-origin: top;
-    transition: transform .7s cubic-bezier(.4,0,.2,1);
-    z-index: 3;
-}
+        .paper {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            height: 180px;
+            background: #fff;
+            border-radius: 6px;
+            padding: 15px;
+            overflow-y: auto;
+            color: #333;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease;
+            z-index: 2;
+        }
 
-.envelope.open::before {
-    transform: rotateX(180deg);
-    z-index: 1;
-}
+        .envelope.open .paper {
+            transform: translateY(-120px);
+            height: 340px;
+            animation: paperFloat 3s ease-in-out infinite;
+        }
 
-/* PAPER */
-.paper {
-    position: absolute;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    height: 180px;
-    background: #fff;
-    border-radius: 6px;
-    padding: 15px;
-    overflow-y: auto;
-    color: #333;
-    font-size: .95rem;
-    line-height: 1.5;
-    box-shadow: 0 -10px 20px rgba(0,0,0,.15);
-    transition: transform 1.2s cubic-bezier(.22,1,.36,1), height 1s ease;
-    z-index: 2;
-}
+        @keyframes paperFloat {
+            0%, 100% { transform: translateY(-120px); }
+            50% { transform: translateY(-125px); }
+        }
 
-.envelope.open .paper {
-    transform: translateY(-120px);
-    height: 340px;
-    animation: paperFloat 3s ease-in-out infinite;
-}
+        .shake {
+            animation: shake 0.4s ease;
+        }
 
-@keyframes paperFloat {
-    0%,100% { transform: translateY(-120px); }
-    50% { transform: translateY(-125px); }
-}
+        @keyframes shake {
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
 
-/* SHAKE */
-.shake { animation: shake .4s ease; }
+        #typed-text span {
+            opacity: 0;
+            animation: fade 0.15s forwards;
+        }
 
-@keyframes shake {
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
-}
+        @keyframes fade {
+            to { opacity: 1; }
+        }
 
-/* TYPING */
-#typed-text span {
-    opacity: 0;
-    animation: fade .15s forwards;
-}
+        #cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: #2a71c7;
+            animation: blink 0.8s steps(1) infinite;
+        }
 
-@keyframes fade { to { opacity: 1; } }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
 
-#cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1em;
-    background: #2a71c7;
-    animation: blink .8s steps(1) infinite;
-}
+        /* Responsivitas untuk mobile */
+        @media (max-width: 768px) {
+            .envelope {
+                width: 250px;
+                height: 160px;
+            }
+            .envelope::before {
+                border-left: 125px solid transparent;
+                border-right: 125px solid transparent;
+                border-top: 88px solid #2a71c7;
+            }
+            .paper {
+                height: 140px;
+            }
+            .envelope.open .paper {
+                height: 280px;
+            }
+            #clickText {
+                font-size: 1.4rem;
+            }
+        }
 
-@keyframes blink {
-    50% { opacity: 0; }
-}
-</style>
+        /* Tombol restart (opsional) */
+        #restartBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #2a71c7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Tampilkan setelah animasi selesai */
+        }
+    </style>
 </head>
-
 <body>
-<div class="bg"></div>
-
-<div class="container">
-    <h2 id="clickText">Coba klik 🎁</h2>
-
-    <div class="envelope" id="envelope">
-        <div class="paper" id="paper">
-            <span id="typed-text"></span><span id="cursor"></span>
+    <div class="bg"></div>
+    <div class="container">
+        <h2 id="clickText" aria-label="Klik untuk membuka kartu ulang tahun">Coba klik 🎁</h2>
+        <div class="envelope" id="envelope">
+            <div class="paper" id="paper">
+                <span id="typed-text"></span><span id="cursor"></span>
+            </div>
         </div>
+        <button id="restartBtn">Mulai Ulang</button>
     </div>
-</div>
+    <audio id="bg-music" src="lagu.mp3" preload="auto"></audio>
+    <script>
+        const clickText = document.getElementById('clickText');
+        const envelope = document.getElementById('envelope');
+        const paper = document.getElementById('paper');
+        const typedText = document.getElementById('typed-text');
+        const cursor = document.getElementById('cursor');
+        const music = document.getElementById('bg-music');
+        const restartBtn = document.getElementById('restartBtn');
 
-<audio id="bg-music" src="lagu.mp3"></audio>
-
-<script>
-const clickText = document.getElementById('clickText');
-const envelope = document.getElementById('envelope');
-const paper = document.getElementById('paper');
-const typedText = document.getElementById('typed-text');
-const cursor = document.getElementById('cursor');
-const music = document.getElementById('bg-music');
-
-const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
+        const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
 
 to youuu, my boo, my sunshine, my everything. hari ini hari kamu, dan aku mau kamu tau seberapa besar aku sayang dan cinta sama kamu. on your special day, i love you now, and always will. in every possible way.
 
@@ -193,41 +227,66 @@ paling kenceng teriaknya…
 
 HAPPY BIRTHDAY SAYANGGG! 🤍`;
 
+        let i = 0;
+        let opened = false;
+        let typingInterval;
 
-let i = 0;
-let opened = false;
+        // Fungsi untuk membuka envelope
+        function openEnvelope() {
+            if (opened) return;
+            opened = true;
 
-clickText.addEventListener('click', () => {
-    if (opened) return;
-    opened = true;
+            envelope.classList.add('shake');
+            setTimeout(() => {
+                envelope.classList.remove('shake');
+                envelope.classList.add('open');
 
-    envelope.classList.add('shake');
+                // Coba mainkan musik dengan error handling
+                music.volume = 0.5;
+                music.play().catch(() => {
+                    console.warn('Musik tidak dapat dimainkan. Pastikan file "lagu.mp3" ada.');
+                });
 
-    setTimeout(() => {
-        envelope.classList.remove('shake');
-        envelope.classList.add('open');
+                // Mulai typing setelah 1 detik
+                setTimeout(() => {
+                    typeChar();
+                }, 1000);
+            }, 400);
 
-        music.volume = .5;
-        music.play().catch(()=>{});
+            clickText.style.display = 'none';
+        }
 
-        setTimeout(typeChar, 1000);
-    }, 400);
+        // Event listener untuk klik teks
+        clickText.addEventListener('click', openEnvelope);
 
-    clickText.style.display = 'none';
-});
+        // Fungsi typing
+        function typeChar() {
+            if (i < message.length) {
+                const span = document.createElement('span');
+                span.textContent = message[i++];
+                typedText.appendChild(span);
+                paper.scrollTop = paper.scrollHeight;
+                typingInterval = setTimeout(typeChar, 40);
+            } else {
+                cursor.style.display = 'none';
+                restartBtn.style.display = 'block'; // Tampilkan tombol restart
+            }
+        }
 
-function typeChar() {
-    if (i < message.length) {
-        const span = document.createElement('span');
-        span.textContent = message[i++];
-        typedText.appendChild(span);
-        paper.scrollTop = paper.scrollHeight;
-        setTimeout(typeChar, 40);
-    } else {
-        cursor.style.display = 'none';
-    }
-}
-</script>
+        // Tombol restart
+        restartBtn.addEventListener('click', () => {
+            // Reset semua
+            opened = false;
+            i = 0;
+            typedText.innerHTML = '';
+            cursor.style.display = 'inline-block';
+            envelope.classList.remove('open', 'shake');
+            clickText.style.display = 'block';
+            restartBtn.style.display = 'none';
+            music.pause();
+            music.currentTime = 0;
+            clearTimeout(typingInterval);
+        });
+    </script>
 </body>
 </html>
-
