@@ -1,39 +1,53 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selamat Ulang Tahun Fakhri Muhammad Najah 🥳</title>
+<script>
+  const clickText = document.getElementById('clickText');
+  const envelope = document.getElementById('envelope');
+  const bgMusic = document.getElementById('bg-music');
+  const paper = document.getElementById('paper');
+  const typedTextEl = document.getElementById('typed-text');
+  const cursorEl = document.getElementById('cursor');
 
-  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet" />
+  const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0f4c81, #3a7bd5);
-      font-family: 'Nunito Sans', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
+to youuu, my boo, my sunshine, my everything. hari ini hari kamu, dan aku mau kamu tau seberapa besar aku sayang dan cinta sama kamu. on your special day, i love you now, and always will. in every possible way.
+
+kamu itu tenang di saat aku marah, kamu itu peluk nyaman pas aku cape, kamu itu rumah buat hatiku yang sering nyasar. you are the one i care about most, lebih dari apa pun.
+
+kamu adalah cahaya yang terangin badaiku, dan aku harap kita bisa deket terus kaya gini selamanya. i can't even find the right words to explain how much you mean to me.
+
+kadang cinta itu terlalu besar buat dijelasin, tapi selalu bisa dirasain.
+
+so on your birthday, i choose you. every day. every time.
+
+I LOVE JUST YOU!
+
+HAPPY BIRTHDAY SAYANGGG! 🤍`;
+
+  let index = 0;
+
+  clickText.addEventListener('click', () => {
+    envelope.classList.add('open');
+    clickText.style.display = 'none';
+
+    bgMusic.volume = 0.8;
+    bgMusic.play();
+
+    typeNextChar();
+  });
+
+  function typeNextChar() {
+    if (index < message.length) {
+      typedTextEl.textContent += message.charAt(index);
+      index++;
+
+      // 🔥 AUTO SCROLL PALING AMAN
+      paper.scrollTop = paper.scrollHeight;
+
+      setTimeout(typeNextChar, 45);
+    } else {
+      cursorEl.style.display = 'none';
     }
-
-    h2#clickText {
-      cursor: pointer;
-      color: #e6f0ff;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      animation: pulse 1.2s infinite;
-      text-align: center;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
+  }
+</script>
 
     .envelope {
       position: relative;
