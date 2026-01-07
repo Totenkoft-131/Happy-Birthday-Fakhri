@@ -1,246 +1,175 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun Fakhri Muhammad Najah 🥳</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun Fakhri 💙</title>
 
-    <style>
-        /* BODY & BACKGROUND */
-        body {
-            margin: 0;
-            padding: 0;
-            background: radial-gradient(circle at top, #0a0f22, #000);
-            font-family: 'Nunito Sans', sans-serif;
-            display: flex;
-            flex-direction: column; /* Biar teks klik di atas amplop */
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
-            animation: slowZoom 15s ease-in-out infinite alternate;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
+<style>
+/* RESET */
+* { box-sizing: border-box; }
 
-        /* CLICK TEXT */
-        #clickText {
-            cursor: pointer;
-            color: #e6eaff;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: pulse 1.4s infinite;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.95); }
-        }
-
-        /* ENVELOPE */
-        .envelope {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            background: #1f4f80;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            perspective: 1000px;
-        }
-
-        /* FLAP (Tutup Amplop) */
-        .envelope::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 110px solid #2a71c7;
-            transform-origin: top;
-            transition: transform 0.6s ease;
-            z-index: 3; /* Di atas segalanya saat tertutup */
-        }
-
-        .envelope.open::before {
-            transform: rotateX(180deg);
-            z-index: 1; /* Di belakang kertas saat terbuka */
-        }
-
-        /* PAPER */
-        .paper {
-            position: absolute;
-            bottom: 10px; /* Posisi awal di dalam */
-            left: 10px;
-            right: 10px;
-            height: 180px;
-            background: #fff;
-            padding: 15px;
-            box-sizing: border-box;
-            border-radius: 5px;
-            overflow-y: auto;
-            transition: transform 1s ease-in-out, height 1s ease-in-out;
-            z-index: 2;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-            white-space: pre-wrap; /* Menjaga spasi dan baris baru */
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #333;
-        }
-
-        .envelope.open .paper {
-            transform: translateY(-150px); /* Kertas naik ke atas */
-            height: 350px; /* Kertas memanjang saat keluar */
-        }
-
-        /* TYPING EFFECT */
-        #typed-text {
-            display: inline;
-        }
-        #typed-text span {
-            opacity: 0;
-            animation: fadeText .1s forwards;
-        }
-        @keyframes fadeText { to { opacity: 1; } }
-
-        /* CURSOR */
-        #cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background: #2a71c7;
-            margin-left: 2px;
-            vertical-align: middle;
-            animation: blink 0.8s step-start infinite;
-        }
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* SHAKE ANIMATION */
-        .shake { animation: shake 0.5s ease; }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-    </style>
-</head>
-<body>
-
-    <h2 id="clickText">Coba klik 🎁</h2>
-
-    <div class="envelope" id="envelope">
-        <div class="paper" id="paper">
-            <span id="typed-text"></span><span id="cursor"></span>
-        </div>
-    </div>
-
-    <audio id="bg-music" src="lagu.mp3"></audio>
-
-    <script>
-        const clickText = document.getElementById('clickText');
-        const envelope = document.getElementById('envelope');
-        const paper = document.getElementById('paper');
-        const typedTextEl = document.getElementById('typed-text');
-        const bgMusic = document.getElementById('bg-music');
-        const cursorEl = document.getElementById('cursor');
-
-        const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
-
-to youuu, my boo, my sunshine, my everything. hari ini hari kamu, dan aku mau kamu tau seberapa besar aku sayang dan cinta sama kamu. on your special day, i love you now, and always will. in every possible way.
-
-kamu itu tenang di saat aku marah, kamu itu peluk nyaman pas aku cape, kamu itu rumah buat hatiku yang sering nyasar. you are the one i care about most, lebih dari apa pun.
-
-kamu adalah cahaya yang terangin badaiku, dan aku harap kita bisa deket terus kaya gini selamanya. i can't even find the right words to explain how much you mean to me.
-
-kadang cinta itu terlalu besar buat dijelasin, tapi selalu bisa dirasain.
-
-so on your birthday, i choose you. every day. every time.
-
-I LOVE JUST YOU!
-
-HAPPY BIRTHDAY SAYANGGG! 🤍`;
-
-        let index = 0;
-        let isOpening = false;
-
-        clickText.addEventListener('click', () => {
-            if (isOpening) return;
-            isOpening = true;
-
-            // Animasi Amplop
-            envelope.classList.add('shake');
-            
-            setTimeout(() => { 
-                envelope.classList.remove('shake');
-                envelope.classList.add('open'); 
-                
-                // Mulai musik
-                bgMusic.volume = 0.5;
-                bgMusic.play().catch(e => console.log("Autoplay dicegah browser, musik butuh interaksi user."));
-
-                // Mulai ngetik setelah amplop terbuka sedikit
-                setTimeout(typeNextChar, 1000);
-            }, 500);
-
-            clickText.style.visibility = 'hidden';
-        });
-
-        function typeNextChar() {
-            if (index < message.length) {
-                const char = message[index++];
-                const span = document.createElement('span');
-                span.textContent = char;
-                typedTextEl.appendChild(span);
-
-                // Auto scroll ke bawah kertas
-                paper.scrollTop = paper.scrollHeight;
-                
-                // Kecepatan ngetik (45ms)
-                setTimeout(typeNextChar, 45);
-            } else {
-                cursorEl.style.display = 'none';
-            }
-        }
-    </script>
-</body>
-</html>  animation: fadeText .3s forwards;
-}
-@keyframes fadeText {
-  to { opacity: 1; }
+/* BACKGROUND WRAPPER (UNTUK SLOW ZOOM) */
+.bg {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #0a0f22, #000);
+    animation: slowZoom 16s ease-in-out infinite alternate;
+    z-index: -1;
 }
 
-/* CURSOR */
+@keyframes slowZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+}
+
+/* BODY */
+body {
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: white;
+}
+
+/* CLICK TEXT */
+#clickText {
+    cursor: pointer;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    animation: pulse 1.4s infinite;
+    text-shadow: 0 0 12px rgba(255,255,255,.3);
+}
+
+@keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .6; transform: scale(.95); }
+}
+
+/* ENVELOPE */
+.envelope {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background: #1f4f80;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.6);
+    perspective: 1000px;
+    transition: transform .2s ease;
+}
+
+.envelope:active {
+    transform: scale(.98);
+}
+
+/* FLAP */
+.envelope::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 110px solid #2a71c7;
+    transform-origin: top;
+    transition: transform .7s cubic-bezier(.4,0,.2,1);
+    z-index: 3;
+}
+
+.envelope.open::before {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+/* PAPER */
+.paper {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: 180px;
+    background: #fff;
+    border-radius: 6px;
+    padding: 15px;
+    overflow-y: auto;
+    color: #333;
+    font-size: .95rem;
+    line-height: 1.5;
+    box-shadow: 0 -10px 20px rgba(0,0,0,.15);
+    transform: translateY(0);
+    transition:
+        transform 1.2s cubic-bezier(.22,1,.36,1),
+        height 1s ease;
+    z-index: 2;
+}
+
+.envelope.open .paper {
+    transform: translateY(-150px);
+    height: 340px;
+}
+
+/* PAPER FLOAT */
+.envelope.open .paper {
+    animation: paperFloat 3s ease-in-out infinite;
+}
+
+@keyframes paperFloat {
+    0%,100% { transform: translateY(-150px); }
+    50% { transform: translateY(-155px); }
+}
+
+/* SHAKE */
+.shake {
+    animation: shake .4s ease;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+}
+
+/* TYPING */
+#typed-text span {
+    opacity: 0;
+    animation: fade .15s forwards;
+}
+
+@keyframes fade { to { opacity: 1; } }
+
 #cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1.2em;
-  background: #0f3557;
-  animation: blink 1s step-start infinite;
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: #2a71c7;
+    margin-left: 2px;
+    animation: blink .8s steps(1) infinite;
 }
+
 @keyframes blink {
-  0%,50% { opacity: 1; }
-  51%,100% { opacity: 0; }
+    50% { opacity: 0; }
 }
 </style>
 </head>
+
 <body>
+<div class="bg"></div>
 
 <h2 id="clickText">Coba klik 🎁</h2>
 
 <div class="envelope" id="envelope">
-  <div class="paper" id="paper">
-    <div id="typed-text"></div><span id="cursor"></span>
-  </div>
+    <div class="paper" id="paper">
+        <span id="typed-text"></span><span id="cursor"></span>
+    </div>
 </div>
 
 <audio id="bg-music" src="lagu.mp3"></audio>
@@ -249,9 +178,9 @@ HAPPY BIRTHDAY SAYANGGG! 🤍`;
 const clickText = document.getElementById('clickText');
 const envelope = document.getElementById('envelope');
 const paper = document.getElementById('paper');
-const typedTextEl = document.getElementById('typed-text');
-const bgMusic = document.getElementById('bg-music');
-const cursorEl = document.getElementById('cursor');
+const typedText = document.getElementById('typed-text');
+const cursor = document.getElementById('cursor');
+const music = document.getElementById('bg-music');
 
 const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
 
@@ -261,38 +190,57 @@ kamu itu tenang di saat aku marah, kamu itu peluk nyaman pas aku cape, kamu itu 
 
 kamu adalah cahaya yang terangin badaiku, dan aku harap kita bisa deket terus kaya gini selamanya. i can't even find the right words to explain how much you mean to me.
 
-kadang cinta itu terlalu besar buat dijelasin, tapi selalu bisa dirasain.
+rasanya tuh, kalau pakai kata-kata malah ga cukup. kadang cinta itu terlalu besar buat dijelasin, tapi selalu bisa dirasain dan kamu pasti bisa ngerasain itu dari aku.
 
-so on your birthday, i choose you. every day. every time.
+so on your birthday, i just want to remind you again — i choose you. setiap hari. setiap waktu. in every lifetime, i'd still choose you.
+
+and i'll say it again and again, karena ulang tahun kamu bukan cuma perayaan umur, tapi juga kesempatan buat aku bilang:
 
 I LOVE JUST YOU!
 
-HAPPY BIRTHDAY SAYANGGG! 🤍`;
+hari ini, nikmatin setiap momen ya. tertawa, bahagia, dikelilingi cinta dari orang-orang terdekatmu.
 
-let index = 0;
+dan jangan lupa,
+ada aku yang paling depan,
+paling kenceng teriaknya…
+
+HAPPY BIRTHDAY SAYANGGG! 🤍`;
+    
+
+let i = 0;
+let opened = false;
 
 clickText.addEventListener('click', () => {
-  envelope.classList.add('shake');
-  setTimeout(() => { envelope.classList.add('open'); }, 400);
-  clickText.style.display = 'none';
-  bgMusic.volume = 0.7;
-  bgMusic.play();
-  typeNextChar();
+    if (opened) return;
+    opened = true;
+
+    envelope.classList.add('shake');
+
+    setTimeout(() => {
+        envelope.classList.remove('shake');
+        envelope.classList.add('open');
+
+        music.volume = .5;
+        music.play().catch(()=>{});
+
+        setTimeout(typeChar, 1000);
+    }, 400);
+
+    clickText.style.display = 'none';
 });
 
-function typeNextChar() {
-  if (index < message.length) {
-    const span = document.createElement('span');
-    span.textContent = message[index++];
-    typedTextEl.appendChild(span);
-    paper.scrollTop = paper.scrollHeight;
-    setTimeout(typeNextChar, 45);
-  } else {
-    cursorEl.style.display = 'none';
-  }
+function typeChar() {
+    if (i < message.length) {
+        const span = document.createElement('span');
+        span.textContent = message[i++];
+        typedText.appendChild(span);
+        paper.scrollTop = paper.scrollHeight;
+        setTimeout(typeChar, 40);
+    } else {
+        cursor.style.display = 'none';
+    }
 }
 </script>
-
 </body>
 </html>
 
