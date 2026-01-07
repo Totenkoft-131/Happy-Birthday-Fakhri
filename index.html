@@ -1,12 +1,147 @@
-<script>
-  const clickText = document.getElementById('clickText');
-  const envelope = document.getElementById('envelope');
-  const bgMusic = document.getElementById('bg-music');
-  const paper = document.getElementById('paper');
-  const typedTextEl = document.getElementById('typed-text');
-  const cursorEl = document.getElementById('cursor');
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun Fakhri Muhammad Najah 🥳</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
 
-  const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
+<style>
+/* BODY & ZOOM BACKGROUND */
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #0a0f22, #000);
+  font-family: 'Nunito Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  animation: slowZoom 15s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.03); }
+}
+
+/* CLICK TEXT */
+#clickText {
+  cursor: pointer;
+  color: #e6eaff;
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+  animation: pulse 1.4s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ENVELOPE */
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #1f4f80;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+/* FLAP */
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 150px solid transparent;
+  border-right:150px solid transparent;
+  border-top:110px solid #2a71c7;
+  transform-origin: top;
+  transition: transform .8s ease-out;
+}
+.envelope.shake { animation: shake 0.5s ease; }
+@keyframes shake {
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+}
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
+
+/* PAPER */
+.paper {
+  position: absolute;
+  bottom: -350px;
+  left: 0;
+  width: 100%;
+  height: 330px;
+  background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 0 0 14px 14px;
+  overflow-y: auto;
+  transition: bottom 1s ease-out;
+}
+.envelope.open .paper {
+  bottom: 30px;
+  animation: float 3s ease-in-out infinite alternate;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* TYPING TEXT */
+#typed-text span {
+  opacity: 0;
+  animation: fadeText .3s forwards;
+}
+@keyframes fadeText {
+  to { opacity: 1; }
+}
+
+/* CURSOR */
+#cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: #0f3557;
+  animation: blink 1s step-start infinite;
+}
+@keyframes blink {
+  0%,50% { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<h2 id="clickText">Coba klik 🎁</h2>
+
+<div class="envelope" id="envelope">
+  <div class="paper" id="paper">
+    <div id="typed-text"></div><span id="cursor"></span>
+  </div>
+</div>
+
+<audio id="bg-music" src="lagu.mp3"></audio>
+
+<script>
+const clickText = document.getElementById('clickText');
+const envelope = document.getElementById('envelope');
+const paper = document.getElementById('paper');
+const typedTextEl = document.getElementById('typed-text');
+const bgMusic = document.getElementById('bg-music');
+const cursorEl = document.getElementById('cursor');
+
+const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
 
 to youuu, my boo, my sunshine, my everything. hari ini hari kamu, dan aku mau kamu tau seberapa besar aku sayang dan cinta sama kamu. on your special day, i love you now, and always will. in every possible way.
 
@@ -22,37 +157,30 @@ I LOVE JUST YOU!
 
 HAPPY BIRTHDAY SAYANGGG! 🤍`;
 
-  let index = 0;
+let index = 0;
 
-  clickText.addEventListener('click', () => {
-    envelope.classList.add('shake');
+clickText.addEventListener('click', () => {
+  envelope.classList.add('shake');
+  setTimeout(() => { envelope.classList.add('open'); }, 400);
+  clickText.style.display = 'none';
+  bgMusic.volume = 0.7;
+  bgMusic.play();
+  typeNextChar();
+});
 
-    setTimeout(() => {
-      envelope.classList.add('open');
-      envelope.classList.remove('shake');
-    }, 300);
-
-    clickText.style.display = 'none';
-
-    bgMusic.volume = 0.8;
-    bgMusic.play();
-
-    typeNextChar();
-  });
-
-  function typeNextChar() {
-    if (index < message.length) {
-      const span = document.createElement('span');
-      span.textContent = message.charAt(index);
-      typedTextEl.appendChild(span);
-      index++;
-
-      paper.scrollTop = paper.scrollHeight;
-
-      setTimeout(typeNextChar, 45);
-    } else {
-      cursorEl.style.display = 'none';
-    }
+function typeNextChar() {
+  if (index < message.length) {
+    const span = document.createElement('span');
+    span.textContent = message[index++];
+    typedTextEl.appendChild(span);
+    paper.scrollTop = paper.scrollHeight;
+    setTimeout(typeNextChar, 45);
+  } else {
+    cursorEl.style.display = 'none';
   }
+}
 </script>
+
+</body>
+</html>
 
