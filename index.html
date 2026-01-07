@@ -5,25 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selamat Ulang Tahun Fakhri 💙</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- Untuk ikon -->
     <style>
         * {
             box-sizing: border-box;
-        }
-
-        .bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0; /* Fallback untuk inset jika tidak didukung */
-            background: radial-gradient(circle at top, #0a0f22, #000);
-            animation: slowZoom 16s ease-in-out infinite alternate;
-            z-index: -1;
-        }
-
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.06); }
         }
 
         body {
@@ -33,41 +18,68 @@
             overflow-x: hidden;
             overflow-y: auto;
             color: white;
+            background: linear-gradient(135deg, #0a0f22, #1a1a2e, #16213e);
+            animation: bgShift 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top, rgba(10, 15, 34, 0.8), rgba(0, 0, 0, 0.9));
+            z-index: -2;
         }
 
         .container {
             min-height: 100vh;
-            padding-top: 40px;
-            padding-bottom: 220px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
         #clickText {
             cursor: pointer;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            animation: pulse 1.4s infinite;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
-            transition: opacity 0.3s ease;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            animation: heartbeat 1.5s infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.95); }
+        #clickText:hover {
+            transform: scale(1.1);
+            color: #4fc3f7;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .envelope {
             position: relative;
-            width: 300px;
-            height: 200px;
-            background: #1f4f80;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            width: 320px;
+            height: 210px;
+            background: linear-gradient(145deg, #1f4f80, #2a71c7);
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(255, 255, 255, 0.1);
             perspective: 1000px;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
+            filter: drop-shadow(0 0 10px rgba(42, 113, 199, 0.5));
+        }
+
+        .envelope:hover {
+            transform: translateY(-5px);
         }
 
         .envelope::before {
@@ -75,12 +87,13 @@
             position: absolute;
             top: 0;
             left: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 110px solid #2a71c7;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 115px solid #4fc3f7;
             transform-origin: top;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 3;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .envelope.open::before {
@@ -90,110 +103,181 @@
 
         .paper {
             position: absolute;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            height: 180px;
-            background: #fff;
-            border-radius: 6px;
-            padding: 15px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            height: 190px;
+            background: linear-gradient(145deg, #fff, #f0f0f0);
+            border-radius: 8px;
+            padding: 18px;
             overflow-y: auto;
             color: #333;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.15);
-            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), height 1s ease;
+            font-size: 1rem;
+            line-height: 1.6;
+            box-shadow: 0 -12px 25px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(0, 0, 0, 0.05);
+            transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1), height 1.2s ease;
             z-index: 2;
+            backdrop-filter: blur(5px); /* Fallback: hapus jika tidak didukung */
         }
 
         .envelope.open .paper {
-            transform: translateY(-120px);
-            height: 340px;
-            animation: paperFloat 3s ease-in-out infinite;
+            transform: translateY(-130px);
+            height: 360px;
+            animation: paperFloat 4s ease-in-out infinite;
         }
 
         @keyframes paperFloat {
-            0%, 100% { transform: translateY(-120px); }
-            50% { transform: translateY(-125px); }
+            0%, 100% { transform: translateY(-130px) rotate(0deg); }
+            50% { transform: translateY(-135px) rotate(0.5deg); }
         }
 
         .shake {
-            animation: shake 0.4s ease;
+            animation: shake 0.5s ease;
         }
 
         @keyframes shake {
-            25% { transform: translateX(-4px); }
-            75% { transform: translateX(4px); }
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         #typed-text span {
             opacity: 0;
-            animation: fade 0.15s forwards;
+            animation: fadeIn 0.2s forwards;
         }
 
-        @keyframes fade {
+        @keyframes fadeIn {
             to { opacity: 1; }
         }
 
         #cursor {
             display: inline-block;
-            width: 2px;
-            height: 1em;
-            background: #2a71c7;
-            animation: blink 0.8s steps(1) infinite;
+            width: 3px;
+            height: 1.2em;
+            background: linear-gradient(90deg, #2a71c7, #4fc3f7);
+            animation: blink 1s steps(1) infinite;
         }
 
         @keyframes blink {
             50% { opacity: 0; }
         }
 
-        /* Responsivitas untuk mobile */
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, #ff6b6b, #feca57, #48dbfb, #0abde3);
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Kontrol Musik */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        /* Responsivitas */
         @media (max-width: 768px) {
             .envelope {
-                width: 250px;
-                height: 160px;
+                width: 280px;
+                height: 180px;
             }
             .envelope::before {
-                border-left: 125px solid transparent;
-                border-right: 125px solid transparent;
-                border-top: 88px solid #2a71c7;
+                border-left: 140px solid transparent;
+                border-right: 140px solid transparent;
+                border-top: 100px solid #4fc3f7;
             }
             .paper {
-                height: 140px;
+                height: 160px;
             }
             .envelope.open .paper {
-                height: 280px;
+                height: 300px;
             }
             #clickText {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
+            }
+            .controls {
+                bottom: 10px;
+                right: 10px;
             }
         }
 
-        /* Tombol restart (opsional) */
+        /* Tombol Restart */
         #restartBtn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #2a71c7;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: linear-gradient(145deg, #2a71c7, #4fc3f7);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            display: none; /* Tampilkan setelah animasi selesai */
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        #restartBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
     </style>
 </head>
 <body>
     <div class="bg"></div>
+    <div class="confetti" id="confetti"></div>
     <div class="container">
-        <h2 id="clickText" aria-label="Klik untuk membuka kartu ulang tahun">Coba klik 🎁</h2>
+        <h2 id="clickText" aria-label="Klik untuk membuka kartu ulang tahun" tabindex="0">Coba klik 🎁 <i class="fas fa-gift"></i></h2>
         <div class="envelope" id="envelope">
             <div class="paper" id="paper">
                 <span id="typed-text"></span><span id="cursor"></span>
             </div>
         </div>
-        <button id="restartBtn">Mulai Ulang</button>
+        <button id="restartBtn" aria-label="Mulai ulang animasi">Mulai Ulang <i class="fas fa-redo"></i></button>
     </div>
-    <audio id="bg-music" src="lagu.mp3" preload="auto"></audio>
+    <div class="controls">
+        <button class="control-btn" id="musicToggle" aria-label="Toggle musik"><i class="fas fa-play"></i></button>
+    </div>
+    <audio id="bg-music" src="lagu.mp3" preload="auto" loop></audio>
     <script>
         const clickText = document.getElementById('clickText');
         const envelope = document.getElementById('envelope');
@@ -202,6 +286,8 @@
         const cursor = document.getElementById('cursor');
         const music = document.getElementById('bg-music');
         const restartBtn = document.getElementById('restartBtn');
+        const musicToggle = document.getElementById('musicToggle');
+        const confettiContainer = document.getElementById('confetti');
 
         const message = `WAKE UPPP BABYYYY! IT'S YOUR BIRTHDAY! happy birthday 💙🎉
 
@@ -230,6 +316,19 @@ HAPPY BIRTHDAY SAYANGGG! 🤍`;
         let i = 0;
         let opened = false;
         let typingInterval;
+        let isPlaying = false;
+
+        // Fungsi untuk membuat confetti
+        function createConfetti() {
+            for (let j = 0; j < 50; j++) {
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.animationDelay = Math.random() * 2 + 's';
+                confettiContainer.appendChild(piece);
+                setTimeout(() => piece.remove(), 3000);
+            }
+        }
 
         // Fungsi untuk membuka envelope
         function openEnvelope() {
@@ -240,42 +339,52 @@ HAPPY BIRTHDAY SAYANGGG! 🤍`;
             setTimeout(() => {
                 envelope.classList.remove('shake');
                 envelope.classList.add('open');
+                createConfetti(); // Tambahkan confetti
 
-                // Coba mainkan musik dengan error handling
                 music.volume = 0.5;
                 music.play().catch(() => {
                     console.warn('Musik tidak dapat dimainkan. Pastikan file "lagu.mp3" ada.');
                 });
+                isPlaying = true;
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
 
-                // Mulai typing setelah 1 detik
                 setTimeout(() => {
                     typeChar();
                 }, 1000);
-            }, 400);
+            }, 500);
 
             clickText.style.display = 'none';
         }
 
         // Event listener untuk klik teks
         clickText.addEventListener('click', openEnvelope);
+        clickText.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') openEnvelope();
+        });
 
-        // Fungsi typing
+        // Fungsi typing dengan variasi kecepatan
         function typeChar() {
             if (i < message.length) {
+                const char = message[i++];
                 const span = document.createElement('span');
-                span.textContent = message[i++];
+                span.textContent = char;
                 typedText.appendChild(span);
                 paper.scrollTop = paper.scrollHeight;
-                typingInterval = setTimeout(typeChar, 40);
+
+                // Variasi kecepatan: lebih cepat untuk spasi, lebih lambat untuk tanda baca
+                let delay = 50;
+                if (char === ' ' || char === '\n') delay = 20;
+                else if (['!', '.', '?', ','].includes(char)) delay = 100;
+
+                typingInterval = setTimeout(typeChar, delay);
             } else {
                 cursor.style.display = 'none';
-                restartBtn.style.display = 'block'; // Tampilkan tombol restart
+                restartBtn.style.display = 'block';
             }
         }
 
         // Tombol restart
         restartBtn.addEventListener('click', () => {
-            // Reset semua
             opened = false;
             i = 0;
             typedText.innerHTML = '';
@@ -285,7 +394,24 @@ HAPPY BIRTHDAY SAYANGGG! 🤍`;
             restartBtn.style.display = 'none';
             music.pause();
             music.currentTime = 0;
+            isPlaying = false;
+            musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+            confettiContainer.innerHTML = '';
             clearTimeout(typingInterval);
+        });
+
+        // Toggle musik
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                music.play().catch(() => {
+                    console.warn('Musik tidak dapat dimainkan.');
+                });
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
         });
     </script>
 </body>
