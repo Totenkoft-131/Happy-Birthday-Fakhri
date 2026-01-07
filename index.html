@@ -64,6 +64,7 @@
       border-radius: 0 0 12px 12px;
       transition: top 0.9s ease;
       overflow-y: auto;
+      scroll-behavior: smooth; /* 🔹 biar scroll halus */
     }
 
     .envelope.open .paper {
@@ -109,6 +110,7 @@
     const clickText = document.getElementById('clickText');
     const envelope = document.getElementById('envelope');
     const bgMusic = document.getElementById('bg-music');
+    const paper = document.getElementById('paper');
 
     clickText.addEventListener('click', () => {
       envelope.classList.add('open');
@@ -148,6 +150,10 @@ HAPPY BIRTHDAY SAYANGGG! 🤍`;
       if (index < message.length) {
         typedTextEl.textContent += message.charAt(index);
         index++;
+
+        /* 🔹 AUTO SCROLL NGIKUTIN TEKS */
+        paper.scrollTop = paper.scrollHeight;
+
         setTimeout(typeNextChar, 45);
       } else {
         cursorEl.style.display = 'none';
@@ -157,3 +163,4 @@ HAPPY BIRTHDAY SAYANGGG! 🤍`;
 
 </body>
 </html>
+
